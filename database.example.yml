@@ -1,0 +1,12 @@
+<% git_branch_name = %x[git symbolic-ref HEAD].split('/').last %>
+
+base: &BASE
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
+development:
+  database: <%= "appname_development_#{git_branch_name}" %>
+  <<: *BASE
