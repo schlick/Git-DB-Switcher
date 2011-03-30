@@ -1,0 +1,6 @@
+* ignore detached heads => stick with the currently loaded database
+* allow for quick switching => don't prepare the test database
+* speed up database switching => don't use rails to figure out whether a database exists
+* allow for database cloning => creating a new feature branch clones the existing database structure and content rather than db:setup
+* deletion of databases => when a branch is deleted it should also delete the database
+* user preferences => manual database creation, prompts
