@@ -1,0 +1,11 @@
+This is a proof on concept.
+
+I love using git branches for working on new features but a problem that often comes up is how to cope with the database when switching between branches and the database schema has changed between those branches. I try to stick to the strategy of always rolling back any migrations I've made in my feature branch, switching to the other branch and then rolling forward. But this is cumbersome in practice. I wanted a different way that was less work.
+
+The few files here represent my idea of another way of addressing this problem. Here's the concept:
+
+Each branch has its own version of the development database. Every time you switch between branches your rails app automatically switches to using that branch's development database => no fussing with the database, its schema or data.
+
+To achieve this (so far), I've modified my database.yml file to use the current git branch name as part of the development database name. When I switch branches I use a post-checkout git hook to run a ruby script (via script/runner) which checks to see if a development database exists for this branch. If it doesn't then it automatically creates and sets up the database (via rake db:setup). Finally, it runs rake db:test:prepare to ensure that our test database is ready for use.
+
+At the moment it works but obviously it is really slow for switching and doesn't give you much flexibility. Still, I think the concept has potential and hopefully smarter people than I can improve upon it.
