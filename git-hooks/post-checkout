@@ -1,3 +1,4 @@
 #! /bin/sh
 
-script/runner git_branch_create.rb
+# NOTE: I suppose I could ruby straight in here but we'll leave it as is for now
+ruby git_switch_database.rb
